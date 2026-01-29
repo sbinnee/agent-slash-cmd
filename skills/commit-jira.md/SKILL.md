@@ -34,4 +34,3 @@ tags: $ARGUMENTS
 The user provided these tags: $ARGUMENTS
 
 You have the capability to call multiple tools in a single response. Write a descriptive HEAD and optional BODY based on the changes shown in the staged diff above, create the commit following the provided template. Do not add unstaged files. Do not use any other tools or do anything else. Do not send any other text or messages besides these tool calls.
-

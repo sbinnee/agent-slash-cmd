@@ -15,7 +15,7 @@ Find `disable-model-invocation` keyword.
 
 
 ## List
-
+- commit-jira: Create a git commit with JIRA tags
 
 
 ## Agents other than Claude Code
