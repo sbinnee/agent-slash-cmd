@@ -1,4 +1,4 @@
-# My Agent Skills (read "Slash Commands")
+# My Slash Commands for Coding Agents
 Collection of agent slash commands for me. If you find some useful, feel free to take.
 
 In fact, these skills used to be mostly slash commands for Claude Code. But then
@@ -15,3 +15,10 @@ Find `disable-model-invocation` keyword.
 
 
 ## List
+
+
+
+## Agents other than Claude Code
+While Claude Code is my primary coding agent, I use others too. Since skills are just
+markdown file and a collection of instructions, I found that most agents were doing fine
+without modifying formats.
