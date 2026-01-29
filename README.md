@@ -16,6 +16,11 @@ Find `disable-model-invocation` keyword.
 
 ## List
 - commit-jira: Create a git commit with JIRA tags
+- check-release: Verify readiness to release a new version
+
+
+## Helper script
+[sync-skills.sh](./sync-skills.sh)
 
 
 ## Agents other than Claude Code
