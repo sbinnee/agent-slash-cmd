@@ -1,0 +1,6 @@
+interface:
+  display_name: "Commit Amend"
+  short_description: "Amend latest git commit from staged changes"
+  default_prompt: "Use $commit-amend to amend the latest commit from current staged changes."
+policy:
+  allow_implicit_invocation: false
