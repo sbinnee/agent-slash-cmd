@@ -1,55 +1,64 @@
 ---
 name: check-release
-description: Verify readiness to release a new version
+description: Verify release readiness for a repository and prepare a version/changelog update plan. Use when the user asks to check if a release is ready, determine the next semantic version, validate branch and clean working tree, inspect version strings, or optionally run tests via $check-release with -t/--run-tests.
 ---
 
-# Release Readiness Check
+# Check Release
 
-Run this checklist in order.
+Run a release-readiness check and report pass/fail for key gates before release.
 
-## Checks
+## Inputs
 
-1. Branch
-- `git branch --show-current` must be `main`.
+Interpret invocation text as:
 
-2. Clean working tree
-- `git status --porcelain` must be empty.
+- Optional `-t` or `--run-tests`: run the project test suite.
+- No flag: skip tests.
 
-3. Version sources
-- Read `pyproject.toml` for `version = "X.Y.Z"`.
-- Read `__init__.py` (if present) for `__version__ = "X.Y.Z"`.
-- Report current version and mismatches.
+## Required Checks
 
-4. Git history
-- `git log --oneline -20`
-- Find the latest `v*` tag and summarize commits since then.
+Run these checks in order.
 
-5. Next version
-- Suggest semantic version bump from commit history.
-- Ask user to confirm the target version.
+1. Verify branch:
+`git branch --show-current`
+Pass only when branch is `main`.
 
-6. `CHANGELOG.md` (if present)
-- Follow [Keep a Changelog](https://keepachangelog.com/en/1.1.0).
-- Ensure `## [Unreleased]` exists at the top.
-- Group commits since latest tag under: Added, Changed, Deprecated, Removed, Fixed, Security.
-- After user confirms version `X.Y.Z`:
-  - Rename `## [Unreleased]` to `## [X.Y.Z] - YYYY-MM-DD`.
-  - Insert a new empty `## [Unreleased]` above it.
-  - Update bottom compare links for `[Unreleased]` and `[X.Y.Z]`.
-- Keep older entries unchanged.
+2. Verify clean working tree:
+`git status --porcelain`
+Pass only when output is empty.
 
-7. Optional tests
-- If `-t` or `--run-tests` is passed, run `uv run pytest`.
+3. Read version sources:
+- Read `pyproject.toml` and extract `version = "X.Y.Z"` when present.
+- Read package `__init__.py` files when relevant and extract `__version__ = "X.Y.Z"` when present.
+- Report mismatches or missing version declarations.
+
+4. Inspect recent history:
+`git log --oneline -20`
+Also identify the latest release tag (prefer `v*`) and count commits since that tag.
+
+5. Infer next version:
+- Recommend major/minor/patch bump from commit intent (breaking/features/fixes).
+- Ask user to confirm the exact next version before editing files.
+
+6. Handle `CHANGELOG.md` when present:
+- Detect current structure (`Unreleased` section and/or version headers).
+- Preserve existing entries and format.
+- After user confirms version, add or replace the target version header with today’s date.
+- Summarize changes from commits between latest tag and `HEAD`.
+- Collect commit-message `tags:` metadata when present and include aggregated tags in the changelog notes.
+
+7. Run tests only when requested:
+`uv run pytest`
 
 ## Output
 
-Report:
-- Branch status ✓/✗
-- Uncommitted changes ✓/✗
-- Version files found and current version
-- Last release tag and commits since
-- Next version (after user confirmation)
-- CHANGELOG.md updated (if applicable)
-- Tests run (if requested)
+Return a structured readiness summary including:
 
-Present a concise summary and ask for final confirmation before release actions.
+- Branch check (`main`) pass/fail
+- Clean working tree pass/fail
+- Version file findings (and mismatches)
+- Latest release tag and commit count since release
+- Recommended next version and user-confirmed version
+- Changelog update status (if `CHANGELOG.md` exists)
+- Test run status (if requested)
+
+Ask for final confirmation before performing any release-adjacent write operations not already requested.
