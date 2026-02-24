@@ -1,8 +1,9 @@
 ---
-allowed-tools: Bash(git status:*), Bash(git diff:*), Bash(git commit:*)
-disable-model-invocation: true
+name: commit-jira
 description: Create a git commit with JIRA tags
+disable-model-invocation: true
 argument-hint: [-v|--verbose] [-x|--explanation [<explanation>]] [tags...]
+allowed-tools: Bash(git status:*), Bash(git diff:*), Bash(git commit:*)
 ---
 
 ## Context
