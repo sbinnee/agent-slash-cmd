@@ -1,0 +1,6 @@
+interface:
+  display_name: "Check Release"
+  short_description: "Validate release readiness and changelog updates"
+  default_prompt: "Use $check-release to verify release readiness for this repository."
+policy:
+  allow_implicit_invocation: false

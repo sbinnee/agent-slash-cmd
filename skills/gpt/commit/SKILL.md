@@ -16,7 +16,7 @@ Create exactly one commit from staged changes.
 - `git log --oneline -10`
 2. If nothing is staged, stop and say there is nothing to commit.
 3. Build the commit message:
-- HEAD: concise and specific (prefer <= 50 chars)
+- HEAD: concise and specific (try to respect 50 chars or less)
 - BODY: optional; short by default, fuller with `-v/--verbose`
 - `-x/--explanation`: reflect rationale in HEAD/BODY
 - `-t/--tags "<...>"`: include `tags: <...>` only when provided
