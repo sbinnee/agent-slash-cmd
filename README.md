@@ -1,29 +1,28 @@
 # My Slash Commands for Coding Agents
-Collection of agent slash commands for me. If you find some useful, feel free to take.
+Personal collection of slash-style skills for coding agents.
 
-In fact, these skills used to be mostly slash commands for Claude Code. But then
-Anthropic decided to merge slash code into skills. So I call skills but they are
-actually just slash commands, that I manually execute. 
+Provider-specific versions are separated under:
+- `skills/claude/`
+- `skills/gpt/`
 
-For those who don't know how they differ, skills were designed to be used automatically
-by an agent, whereas slash commands are meant to be invocked manually by users by typing
-these command, much like shell commands. 
+Reference:
+- https://code.claude.com/docs/en/skills
+- https://developers.openai.com/codex/skills/
 
-ref: https://code.claude.com/docs/en/skills
-
-Find `disable-model-invocation` keyword.
-
-
-## List
-- commit-jira: Create a git commit with JIRA tags
+## Skills
+- commit: Create a git commit with optional tags
+- commit-amend: Amend latest commit from staged changes
 - check-release: Verify readiness to release a new version
 
-
-## Helper script
+## Helper
 [sync-skills.sh](./sync-skills.sh)
 
+Supported tools: `claude`, `codex`
 
-## Agents other than Claude Code
-While Claude Code is my primary coding agent, I use others too. Since skills are just
-markdown file and a collection of instructions, I found that most agents were doing fine
-without modifying formats.
+Examples:
+- `./sync-skills.sh --tool claude`
+- `./sync-skills.sh --tool codex`
+- `./sync-skills.sh --tool codex --source repo`
+- `./sync-skills.sh --tool codex --source local`
+
+By default, `sync-skills.sh` uses `repo -> local` as the default choice at each diff prompt.
