@@ -26,8 +26,8 @@ Run these checks in order.
 Pass only when branch is `main`.
 
 2. Verify clean working tree:
-`git status --porcelain`
-Pass only when output is empty.
+`git status --porcelain --untracked-files=no`
+Ignore untracked files. Pass only when output is empty.
 
 3. Read version sources:
 - Read `pyproject.toml` and extract `version = "X.Y.Z"` when present.
