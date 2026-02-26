@@ -17,15 +17,16 @@ Amend the latest commit using staged changes.
 - `git diff --staged HEAD`
 2. If nothing is staged, stop and warn.
 3. Read latest commit message:
-- `git log -1 --pretty=full`
-4. Keep existing `tags:` line only if present in the latest commit message.
-5. Write a new message from staged diff:
-- HEAD: concise summary
-- BODY: optional, only if useful
-6. Run one amend commit using staged changes only:
-- `git commit --amend -m "<HEAD>" -m "<BODY>" [-m "tags: ..."]`
+- `git log -1 --pretty=%B`
+4. Write a message for the **full combined commit** (old + new changes):
+- Use the existing message as baseline.
+- Extend it if the new changes add to it; rewrite parts that the new changes supersede.
+- Keep existing `tags:` line only if present.
+5. Run one amend commit using staged changes only:
+- `git commit --amend -m "<message>"`
 
 ## Constraints
 
 - Never run `git add` or stage files.
-- Do not add tags unless they already exist in the previous commit message.
+- Message must reflect the whole commit, not just the new diff.
+- Do not add tags unless already present.
