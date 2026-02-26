@@ -1,27 +1,45 @@
 ---
 name: commit
-description: Create exactly one git commit from staged changes. Use when users ask to commit staged work, with optional verbose body (`-v/--verbose`), rationale text (`-x/--explanation`), and optional tags (`-t/--tags`).
+description: Create exactly one git commit from staged changes. Use when users ask to commit staged work, with optional verbose body (`-v/--verbose`), rationale text (`-x/--explanation`), and optional tags (`-t/--tags`). Validate arguments first and fail on invalid flags or malformed options.
 ---
 
 # Commit
 
 Create exactly one commit from staged changes.
 
+## Inputs
+
+Accept only these options:
+
+- `-v` or `--verbose`
+- `-x` or `--explanation [<explanation>]`
+- `-t` or `--tags "<tag1 tag2 ...>"`
+
 ## Steps
 
-1. Run and inspect:
+1. Validate arguments before any git command:
+- Reject unknown flags.
+- Reject unexpected positional arguments.
+- Reject duplicated flags.
+- Reject malformed options (for example: missing value for `-t/--tags`, or value provided to `-v/--verbose`).
+- On any invalid input, stop immediately and return:
+```text
+Error: invalid arguments: <reason>
+Usage: $commit [-v|--verbose] [-x|--explanation [<explanation>]] [-t|--tags "<tag1 tag2 ...>"]
+```
+2. Run and inspect:
 - `git status`
 - `git diff --staged HEAD`
 - `git branch --show-current`
 - `git log --oneline -10`
-2. If nothing is staged, stop and say there is nothing to commit.
-3. Build the commit message:
+3. If nothing is staged, stop and say there is nothing to commit.
+4. Build the commit message:
 - HEAD: concise and specific
 - BODY: optional; short by default, fuller with `-v/--verbose`
 - `-x/--explanation`: interpret as intent/context and rewrite naturally into HEAD/BODY; do not paste the explanation verbatim unless the user explicitly asks for a direct quote
 - `-x/--explanation`: do not add rigid labels like `Rationale:` or `Explanation:` just because `-x` is present
 - `-t/--tags "<...>"`: include `tags: <...>` only when provided
-4. Run one `git commit` for staged changes only.
+5. Run one `git commit` for staged changes only.
 
 Example for `-x` handling:
 - Input explanation: `from local to repo. I've worked with codex to improve this skill`
