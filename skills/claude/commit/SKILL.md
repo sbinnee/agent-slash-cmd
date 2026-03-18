@@ -60,5 +60,6 @@ tags: <space-separated tags from -t/--tags>
 ## Constraints
 
 - Never run `git add`.
+- Never use `git -C <path>`; the working directory is already the project root.
 - Do not include unstaged changes.
 - Create exactly one commit.

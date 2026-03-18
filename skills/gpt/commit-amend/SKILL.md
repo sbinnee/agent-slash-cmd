@@ -26,5 +26,6 @@ Amend the latest commit using staged changes.
 ## Constraints
 
 - Never run `git add` or stage files.
+- Never use `git -C <path>`; the working directory is already the project root.
 - Message must reflect the whole commit, not just the new diff.
 - Do not add tags unless already present.
