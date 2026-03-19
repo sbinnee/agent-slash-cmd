@@ -32,8 +32,10 @@ Ignore untracked files. Pass only when output is empty.
 - Report mismatches or missing version declarations.
 
 4. Inspect recent history:
-`git log --oneline -20`
-Also identify the latest release tag (prefer `v*`) and count commits since that tag.
+First identify the latest release tag: `git describe --tags --abbrev=0 --match 'v*'`
+Then show all commits since that tag: `git log --oneline <tag>..HEAD`
+If no release tag exists, fall back to `git log --oneline` (all commits).
+Count the commits since the tag.
 
 5. Infer next version:
 - Recommend major/minor/patch bump from commit intent (breaking/features/fixes).
