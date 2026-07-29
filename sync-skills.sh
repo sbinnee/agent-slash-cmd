@@ -45,13 +45,14 @@ while [[ $# -gt 0 ]]; do
             echo
             echo "Options:"
             echo "  -t, --tool TOOL    Tool name (default: claude)"
-            echo "                     Supported: claude, codex"
+            echo "                     Supported: claude, codex, opencode"
             echo "  -s, --source SRC   Default apply direction at prompt: repo or local (default: repo)"
             echo "  -h, --help         Show this help message"
             echo
             echo "Provider is inferred from --tool:"
-            echo "  claude -> skills/claude"
-            echo "  codex -> skills/gpt"
+            echo "  claude   -> skills/claude"
+            echo "  codex    -> skills/gpt"
+            echo "  opencode -> skills/opencode"
             exit 0
             ;;
         *)
@@ -66,11 +67,15 @@ done
 case "$TOOL" in
     claude) PROVIDER="claude" ;;
     codex) PROVIDER="gpt" ;;
-    *) echo -e "${RED}Error: Unsupported tool '$TOOL'. Use 'claude' or 'codex'.${NC}"; exit 1 ;;
+    opencode) PROVIDER="opencode" ;;
+    *) echo -e "${RED}Error: Unsupported tool '$TOOL'. Use 'claude', 'codex', or 'opencode'.${NC}"; exit 1 ;;
 esac
 
 REPO_SKILLS_DIR="./skills/$PROVIDER"
-USER_SKILLS_DIR="$HOME/.$TOOL/skills"
+case "$TOOL" in
+    opencode) USER_SKILLS_DIR="$HOME/.config/opencode/skills" ;;
+    *) USER_SKILLS_DIR="$HOME/.$TOOL/skills" ;;
+esac
 
 case "$DEFAULT_DIRECTION" in
     repo|local) ;;

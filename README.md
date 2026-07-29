@@ -4,10 +4,12 @@ Personal collection of slash-style skills for coding agents.
 Provider-specific versions are separated under:
 - `skills/claude/`
 - `skills/gpt/`
+- `skills/opencode/`
 
 Reference:
 - https://code.claude.com/docs/en/skills
 - https://developers.openai.com/codex/skills/
+- https://opencode.ai/docs/skills/
 
 ## Skills
 - commit: Create a git commit with optional tags
@@ -17,11 +19,12 @@ Reference:
 ## Helper
 [sync-skills.sh](./sync-skills.sh)
 
-Supported tools: `claude`, `codex`
+Supported tools: `claude`, `codex`, `opencode`
 
 Examples:
 - `./sync-skills.sh --tool claude`
 - `./sync-skills.sh --tool codex`
+- `./sync-skills.sh --tool opencode`
 - `./sync-skills.sh --tool codex --source repo`
 - `./sync-skills.sh --tool codex --source local`
 
