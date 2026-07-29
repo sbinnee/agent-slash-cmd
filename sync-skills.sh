@@ -45,7 +45,7 @@ while [[ $# -gt 0 ]]; do
             echo
             echo "Options:"
             echo "  -t, --tool TOOL    Tool name (default: claude)"
-            echo "                     Supported: claude, codex, opencode"
+            echo "                     Supported: claude, codex, opencode, vibe"
             echo "  -s, --source SRC   Default apply direction at prompt: repo or local (default: repo)"
             echo "  -h, --help         Show this help message"
             echo
@@ -53,6 +53,7 @@ while [[ $# -gt 0 ]]; do
             echo "  claude   -> skills/claude"
             echo "  codex    -> skills/gpt"
             echo "  opencode -> skills/opencode"
+            echo "  vibe     -> skills/vibe"
             exit 0
             ;;
         *)
@@ -68,12 +69,14 @@ case "$TOOL" in
     claude) PROVIDER="claude" ;;
     codex) PROVIDER="gpt" ;;
     opencode) PROVIDER="opencode" ;;
-    *) echo -e "${RED}Error: Unsupported tool '$TOOL'. Use 'claude', 'codex', or 'opencode'.${NC}"; exit 1 ;;
+    vibe) PROVIDER="vibe" ;;
+    *) echo -e "${RED}Error: Unsupported tool '$TOOL'. Use 'claude', 'codex', 'opencode', or 'vibe'.${NC}"; exit 1 ;;
 esac
 
 REPO_SKILLS_DIR="./skills/$PROVIDER"
 case "$TOOL" in
     opencode) USER_SKILLS_DIR="$HOME/.config/opencode/skills" ;;
+    vibe) USER_SKILLS_DIR="$HOME/.vibe/skills" ;;
     *) USER_SKILLS_DIR="$HOME/.$TOOL/skills" ;;
 esac
 

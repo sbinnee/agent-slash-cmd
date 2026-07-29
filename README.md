@@ -5,11 +5,13 @@ Provider-specific versions are separated under:
 - `skills/claude/`
 - `skills/gpt/`
 - `skills/opencode/`
+- `skills/vibe/`
 
 Reference:
 - https://code.claude.com/docs/en/skills
 - https://developers.openai.com/codex/skills/
 - https://opencode.ai/docs/skills/
+- https://docs.mistral.ai/vibe/code/cli/skills
 
 ## Skills
 - commit: Create a git commit with optional tags
@@ -19,12 +21,13 @@ Reference:
 ## Helper
 [sync-skills.sh](./sync-skills.sh)
 
-Supported tools: `claude`, `codex`, `opencode`
+Supported tools: `claude`, `codex`, `opencode`, `vibe`
 
 Examples:
 - `./sync-skills.sh --tool claude`
 - `./sync-skills.sh --tool codex`
 - `./sync-skills.sh --tool opencode`
+- `./sync-skills.sh --tool vibe`
 - `./sync-skills.sh --tool codex --source repo`
 - `./sync-skills.sh --tool codex --source local`
 
